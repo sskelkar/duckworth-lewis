@@ -1,5 +1,7 @@
 package com.espncricinfo.cricket.dl;
 
+import java.math.BigDecimal;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,10 +22,10 @@ public class ResourcePercentageTest {
   
   @Test
   public void fetchResourcePercentage() {
-    Assert.assertTrue("100% resources at the start of match", resourcePercentage.forOverRemaingAndWicketsLost(Over.valueOf("50"), 0) == 100.0);
+    Assert.assertTrue("100% resources at the start of match", resourcePercentage.forOverRemaingAndWicketsLost(Over.valueOf("50"), 0).equals(new BigDecimal("100.0")));
     
-    Assert.assertTrue("7.5% resources after 9 wickets down and 10 overs remaining", resourcePercentage.forOverRemaingAndWicketsLost(Over.valueOf("10"), 9) == 7.5);
+    Assert.assertTrue("7.5% resources after 9 wickets down and 10 overs remaining", resourcePercentage.forOverRemaingAndWicketsLost(Over.valueOf("10"), 9).equals(new BigDecimal("7.5")));
     
-    Assert.assertTrue("16.4% resources after 5 wickets down and 5 overs remaining", resourcePercentage.forOverRemaingAndWicketsLost(Over.valueOf("5"), 5) == 16.4);
+    Assert.assertTrue("16.4% resources after 5 wickets down and 5 overs remaining", resourcePercentage.forOverRemaingAndWicketsLost(Over.valueOf("5"), 5).equals(new BigDecimal("16.4")));
   }
 }

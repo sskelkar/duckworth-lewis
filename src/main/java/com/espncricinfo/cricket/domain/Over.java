@@ -8,6 +8,10 @@ public final class Over {
   private int balls;
   private String representation;
   
+  private Over(int balls) {
+    this(balls, String.valueOf(balls / 6).concat(".").concat(String.valueOf(balls % 6)));
+  }
+  
   private Over(int balls, String representation) {
     this.balls = balls;
     this.representation = representation;
@@ -50,5 +54,19 @@ public final class Over {
   @Override
   public int hashCode() {
     return this.balls;
+  }
+  
+  public Over add(Over o) {
+    if(o == null)
+      return this;
+    
+    return new Over(this.getBalls() + o.getBalls());
+  }
+  
+  public Over subtract(Over o) {
+    if(o == null)
+      return this;
+    
+    return new Over(this.getBalls() - o.getBalls());
   }
 }

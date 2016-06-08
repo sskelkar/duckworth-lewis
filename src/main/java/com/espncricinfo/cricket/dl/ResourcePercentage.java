@@ -2,22 +2,26 @@ package com.espncricinfo.cricket.dl;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Component;
 
 import com.espncricinfo.cricket.domain.Over;
 
-@Component
 public class ResourcePercentage {
 
-  private Map<Integer, Double> resourcePerLostWicket;
-  private Map<Over, Map<Integer, Double>> resourcePerRemainingOver;
+  private Map<Integer, BigDecimal> resourcePerLostWicket;
+  private Map<Over, Map<Integer, BigDecimal>> resourcePerRemainingOver;
   
-  
-  public Double forOverRemaingAndWicketsLost(Over remainingOvers, Integer wicketsLost) {
+  /**
+   * Returns resource percentage equivalent to given available overs left and wickets already lost. 
+   * @param remainingOvers
+   * @param wicketsLost
+   * @return
+   */
+  public BigDecimal forOverRemaingAndWicketsLost(Over remainingOvers, Integer wicketsLost) {
     if(resourcePerRemainingOver == null)
       initializeResourcePercentageTable();
     
@@ -42,7 +46,7 @@ public class ResourcePercentage {
         resourcePerLostWicket = new HashMap<>();
         
         for(int i=0; i<wickets.length; i++) {
-          resourcePerLostWicket.put(Integer.valueOf(wickets[i]), Double.valueOf(tokens[i+1]));
+          resourcePerLostWicket.put(Integer.valueOf(wickets[i]), new BigDecimal(tokens[i+1]));
         }
         
         resourcePerRemainingOver.put(remainingOvers, resourcePerLostWicket);        

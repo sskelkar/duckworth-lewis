@@ -74,4 +74,19 @@ public class OverTest {
     assertFalse(Over.valueOf("11.0").equals(Over.valueOf("10.1")));
     assertFalse(Over.valueOf("11.0").equals(null));
   }
+  
+  
+  @Test
+  public void overAddition() {
+    assertTrue(Over.valueOf("20.3").add(Over.valueOf("1.5")).equals(Over.valueOf("22.2")));
+    
+    assertTrue(Over.valueOf("10.0").add(Over.valueOf("2")).equals(Over.valueOf("12")));
+  }
+  
+  @Test
+  public void overSubtraction() {
+    assertTrue(Over.valueOf("20.3").subtract(Over.valueOf("1.5")).equals(Over.valueOf("18.4")));
+    
+    assertTrue(Over.valueOf("10.0").subtract(Over.valueOf("2")).equals(Over.valueOf("8")));
+  }
 }
